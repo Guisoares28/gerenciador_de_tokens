@@ -1,9 +1,10 @@
-from flask import jsonify
+from service.token_service import gerarToken
 
+from exceptions.my_exceptions import LoginInvalidoException, UserNotFoundException
 from models.clientModel import Cliente
 from app import db
 from email_validator import validate_email , EmailNotValidError
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 def validar_email(email):
@@ -27,5 +28,22 @@ def cadastro_cliente(nome, email, senha):
     )
     db.session.add(cliente)
     db.session.commit()
+
+def login(email, senha):
+    cliente = Cliente.query.filter_by(email = email).first()
+
+    if not cliente:
+        raise UserNotFoundException()
+
+    if not check_password_hash(cliente.senha, senha):
+        raise LoginInvalidoException()
+
+    token = gerarToken(cliente)
+
+    return token
+
+
+
+
 
 
