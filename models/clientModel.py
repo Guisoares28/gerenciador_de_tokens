@@ -1,4 +1,7 @@
-from app import db
+from sqlalchemy.orm import relationship
+
+from extensions.database import db
+
 
 class Cliente(db.Model):
 
@@ -8,3 +11,6 @@ class Cliente(db.Model):
     nome = db.Column(db.String(100))
     email = db.Column(db.String(100), unique=True)
     senha = db.Column(db.String(300))
+
+    tokens = relationship('Token', back_populates="cliente", cascade='all, delete-orphan')
+

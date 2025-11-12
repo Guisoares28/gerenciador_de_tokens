@@ -1,7 +1,7 @@
 from email_validator import EmailNotValidError
 from flask import jsonify
 
-from exceptions.my_exceptions import LoginInvalidoException
+from exceptions.my_exceptions import LoginInvalidoException, TokenInvalidoException, QuantidadeExcedidaException
 
 
 def init_error_handler(app):
@@ -18,4 +18,18 @@ def init_error_handler(app):
         return jsonify({
             'Erro': 'Email ou Senha inválidos',
             'Solução': 'Informe um Email e Senha válidos'
+        })
+
+    @app.errorhandler(TokenInvalidoException)
+    def handle_invalid_token(error):
+        return jsonify({
+            'Erro': 'Token inválido',
+            'Solução': 'Informe um token válido'
+        })
+
+    @app.errorhandler(QuantidadeExcedidaException)
+    def handle_quantidade_invalid(error):
+        return jsonify({
+            'Erro': 'Quantidade de tokens gerados excedido Máximo 3 tokens',
+            'Solução': 'Delete algum token que não esteja em uso, ou pague o plano adicional'
         })

@@ -1,5 +1,6 @@
 from flask import Flask
-
+from models.clientModel import Cliente
+from models.token_model import Token
 from extensions.database import db, migrate
 from middlewares.error_handler import init_error_handler
 from flask_jwt_extended import JWTManager

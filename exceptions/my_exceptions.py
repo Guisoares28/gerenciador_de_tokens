@@ -10,3 +10,13 @@ class UserNotFoundException(Exception):
     def __init__(self, mensagem="Usuário não encontrado"):
         super().__init__(mensagem)
         self.mensagem = mensagem
+
+class TokenInvalidoException(Exception):
+    def __init__(self, mensagem="Token inválido"):
+        super().__init__(mensagem)
+        self.mensagem = mensagem
+
+class QuantidadeExcedidaException(Exception):
+    def __init__(self, mensagem="Token inválido"):
+        super().__init__(mensagem)
+        self.mensagem = mensagem
