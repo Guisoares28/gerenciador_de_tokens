@@ -1,8 +1,11 @@
+from datetime import timedelta
+
 from flask_jwt_extended import create_access_token
 
 
-def gerarToken(user):
+def gerar_token(user):
     return create_access_token(
         identity = user.email,
-        additional_claims={'id': user.id}
+        expires_delta = timedelta(days=7),
+        additional_claims={'id': user.id, 'owner': 'gerenciaToken'}
     )

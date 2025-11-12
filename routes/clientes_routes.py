@@ -1,4 +1,6 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required, get_jwt
+
 from service.cliente_service import cadastro_cliente
 from service.cliente_service import login
 
@@ -23,3 +25,5 @@ def login_route():
     token = login(email=email, senha=senha)
 
     return jsonify({"token": token})
+
+

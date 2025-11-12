@@ -1,4 +1,4 @@
-from service.token_service import gerarToken
+from service.token_service import gerar_token
 
 from exceptions.my_exceptions import LoginInvalidoException, UserNotFoundException
 from models.clientModel import Cliente
@@ -38,7 +38,7 @@ def login(email, senha):
     if not check_password_hash(cliente.senha, senha):
         raise LoginInvalidoException()
 
-    token = gerarToken(cliente)
+    token = gerar_token(cliente)
 
     return token
 
