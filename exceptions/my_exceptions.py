@@ -1,6 +1,4 @@
 
-
-
 class LoginInvalidoException(Exception):
     def __init__(self, mensagem="Login ou Senha inválidos"):
         super().__init__(mensagem)
@@ -17,6 +15,11 @@ class TokenInvalidoException(Exception):
         self.mensagem = mensagem
 
 class QuantidadeExcedidaException(Exception):
+    def __init__(self, mensagem="Token inválido"):
+        super().__init__(mensagem)
+        self.mensagem = mensagem
+
+class TokenNotFoundException(Exception):
     def __init__(self, mensagem="Token inválido"):
         super().__init__(mensagem)
         self.mensagem = mensagem

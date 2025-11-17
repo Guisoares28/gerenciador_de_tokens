@@ -1,9 +1,13 @@
+import os
+
 from flask import Flask
 from models.clientModel import Cliente
 from models.token_model import Token
 from extensions.database import db, migrate
 from middlewares.error_handler import init_error_handler
 from flask_jwt_extended import JWTManager
+
+
 
 
 def create_app():
@@ -22,7 +26,9 @@ def create_app():
     init_error_handler(app)
 
     from routes.clientes_routes import clientes_bp
+    from views.views_routes import views_bp
     app.register_blueprint(clientes_bp)
+    app.register_blueprint(views_bp)
 
     return app
 

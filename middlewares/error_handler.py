@@ -18,7 +18,7 @@ def init_error_handler(app):
         return jsonify({
             'Erro': 'Email ou Senha inválidos',
             'Solução': 'Informe um Email e Senha válidos'
-        })
+        }),401
 
     @app.errorhandler(TokenInvalidoException)
     def handle_invalid_token(error):
@@ -33,3 +33,9 @@ def init_error_handler(app):
             'Erro': 'Quantidade de tokens gerados excedido Máximo 3 tokens',
             'Solução': 'Delete algum token que não esteja em uso, ou pague o plano adicional'
         })
+
+    @app.errorhandler(TokenInvalidoException)
+    def handle_token_not_found(error):
+        return jsonify({
+            'Erro': 'Nenhum token encontrado para o usuário informado.',
+            'Solução': 'Gere um token para sua aplicação.'})

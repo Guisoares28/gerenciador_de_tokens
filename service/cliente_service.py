@@ -1,6 +1,7 @@
+from models.token_model import Token
 from service.token_service import gerar_token
 
-from exceptions.my_exceptions import LoginInvalidoException, UserNotFoundException
+from exceptions.my_exceptions import LoginInvalidoException, UserNotFoundException, TokenInvalidoException
 from models.clientModel import Cliente
 from app import db
 from email_validator import validate_email , EmailNotValidError
@@ -42,8 +43,12 @@ def login(email, senha):
 
     return token
 
+def pegar_tokens(email):
+    tokens = Token.query.filter_by(email = email).all()
+    if tokens.__len__() == 0:
+        raise TokenInvalidoException()
 
-
+    return tokens
 
 
 
